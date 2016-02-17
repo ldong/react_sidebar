@@ -33,16 +33,15 @@ export default class SidebarItem extends Component {
     let sidebarItem;
 
     try {
+      const compoundComponent = React.createElement(component, options);
+
       sidebarItem = (
         <div className="sidebar-item">
           <div>
             {this.state.isEnabled ? this.state.isOpen ? 'v' : '>'  : ""}
           </div>
           <div>
-            <label>NAME: </label><span>{name}</span>
-          </div>
-          <div>
-            <label>COMPONENT_TYPE: </label><span>{component}</span>
+           {compoundComponent}
           </div>
           <div> 
             <span>TEXT</span>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import SidebarItem from './SidebarItem.js';
 
-
 export default class SidebarItemList extends Component {
 
   constructor(props) {

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Sidebar from './Sidebar.js';
+import CompoundComponent from './CompoundComponent.js';
+import IconComponent from './IconComponent.js';
+import TextComponent from './TextComponent.js';
 
 export default class MySidebar extends Component {
   constructor(props) {
@@ -16,8 +19,21 @@ export default class MySidebar extends Component {
         children: [
           {
             name: 'DATA_CENTER',
-            component: 'text',
-            options: { }
+            component: CompoundComponent,
+            options: {
+              left: {
+                component: IconComponent,
+                options: { 
+                  name: "ICON",
+                }
+              },
+              right: {
+                component: TextComponent,
+                options: { 
+                  name: "TextComponent",
+                }
+              },
+            }
           },
           
           {

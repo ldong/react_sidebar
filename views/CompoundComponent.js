@@ -20,10 +20,12 @@ export default class CompoundComponent extends Component {
   }
 
   render() {
+    let leftChild; 
+    let rightChild;
     try {
-      const { config } = this.props;
-      let leftChild = React.createElement(config.left.component, config.left.options);
-      let rightChild = React.createElement(config.right.component, config.right.options);
+      const {left, right} = this.props;
+      leftChild = React.createElement(left.component, left.options);
+      rightChild = React.createElement(right.component, right.options);
     } catch (e) {
       console.error(e.message, e.name);
     }
