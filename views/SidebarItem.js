@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Sidebar from './Sidebar.js';
+import SidebarItemList from './SidebarItemList.js';
 
 export default class SidebarItem extends Component {
 
@@ -7,45 +8,67 @@ export default class SidebarItem extends Component {
       super(props);
 
       this.state = {
-          isOpen: props.config.isOpen,
+          isOpen: props.config.isOpen || false,
           isEnabled: !!props.config.children 
       };
-
+      
+      console.log('state', this.state);
       this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
-    console.log('clicked');
-    this.setState({
-        isOpen: !this.state.isOpen,
-        isEnabled: !!this.state.isEnabled 
-    });
-
     e.stopPropagation();
+
+    if(this.state.isEnabled){
+      this.setState({
+          isOpen: !this.state.isOpen,
+      });
+    }
+    console.log('handleClick clicked');
   }
 
   render() {
     const {name, component, options, children} = this.props.config;
+    let sidebarItemLists;
+    let sidebarItem;
 
-    const sidebars = children && children.map((sidebarConfig, index, array)=>{
-        return (
-          <Sidebar config={sidebarConfig} />
-        )
-    });
-    console.log('this.state.isOpen && this.state.isEnabled', this.state.isOpen && this.state.isEnabled);
+    try {
+      sidebarItem = (
+        <div className="sidebar-item">
+          <div>
+            {this.state.isEnabled ? this.state.isOpen ? 'v' : '>'  : ""}
+          </div>
+          <div>
+            <label>NAME: </label><span>{name}</span>
+          </div>
+          <div>
+            <label>COMPONENT_TYPE: </label><span>{component}</span>
+          </div>
+          <div> 
+            <span>TEXT</span>
+          </div>
+        </div>
+      )
 
+      if (children) {
+        sidebarItemLists = children.map((sidebarItemListConfig, index, array)=>{
+          return (
+            <SidebarItemList config={sidebarItemListConfig} />
+          )
+        });
+      }
+    } catch (e){
+      console.error('Sidebar Item occured some errors');
+      console.error(e.message, e.name);
+    }
+    
     return (
       <div onClick={this.handleClick}>
-        <div>
-          <label>NAME: </label><span>{name}</span>
+        <div className="sidebar-item">
+          {sidebarItem}      
         </div>
-        
-        <div>
-          <label>COMPONENT_TYPE: </label><span>{component}</span>
-        </div>
-
-        <div className={this.state.isOpen && this.state.isEnabled ? "sidebar" : "sidebar hidden"}>
-          {sidebars}
+        <div className={this.state.isOpen && this.state.isEnabled ? "sidebar-item" : "sidebar-item hidden"}>
+          {sidebarItemLists}
         </div>
       </div>
     )

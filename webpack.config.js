@@ -21,5 +21,6 @@ module.exports = {
     ]
   },
   // devtool: "#inline-source-map" 
+  // devtools: "#eval"
   devtool: "#source-map" 
 };

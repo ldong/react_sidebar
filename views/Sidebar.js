@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SidebarItem from './SidebarItem.js';
+import SidebarItemList from './SidebarItem.js';
 
 export default class Sidebar extends Component {
 
@@ -9,23 +9,25 @@ export default class Sidebar extends Component {
 
   render() {
     const {config} = this.props;
+    let sidebarItemLists;
 
-    let sidebarItems;
-
-    if (Array.isArray(config)) {
-      sidebarItems = config.map((sidebarItemConfig, index, array)=>{
-        return (
-          <SidebarItem config={sidebarItemConfig} />
-        )
-      });
-    } else {
-      sidebarItems = (<SidebarItem config={config} />);
-      console.log('config', config);
+    try {
+      if (Array.isArray(config)) {
+        sidebarItemLists = config.map((sidebarItemListConfig, index, array)=>{
+          console.log();
+          return (
+            <SidebarItemList config={sidebarItemListConfig} />
+          )
+        });
+      }
+    } catch (e){
+      console.error('It must be an array of Sidebar Item List config');
+      console.error(e.message, e.name);
     }
 
     return (
       <div className="sidebar">
-        {sidebarItems}
+        {sidebarItemLists}
       </div>
     )
   }

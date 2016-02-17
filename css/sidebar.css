@@ -5,6 +5,22 @@
 .sidebar {
   position: relative;
   border-style: solid;
+  border-color: red;
+  border-width:  1px;
+}
+
+.sidebar-list {
+  position: relative;
+  border-style: solid;
+  border-color: green;
   border-width:  1px;
   padding-left: 10px;
+}
+
+.sidebar-item {
+  position: relative;
+  border-style: solid;
+  border-color: blue;
+  border-width:  1px;
+  padding-left: 15px;
 }
