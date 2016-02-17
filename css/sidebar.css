@@ -1,0 +1,10 @@
+.hidden {
+    display: none;
+}
+
+.sidebar {
+  position: relative;
+  border-style: solid;
+  border-width:  1px;
+  padding-left: 10px;
+}
