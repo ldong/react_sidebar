@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Sidebar from './Sidebar.js';
-import SidebarItemList from './SidebarItemList.js';
 
 export default class SidebarItem extends Component {
 
@@ -11,7 +10,7 @@ export default class SidebarItem extends Component {
           isOpen: props.config.isOpen || false,
           isEnabled: !!props.config.children 
       };
-      // console.log('state', this.state);
+
       this.handleClick = this.handleClick.bind(this);
   }
 
@@ -27,14 +26,13 @@ export default class SidebarItem extends Component {
 
   render() {
     const {component, options, children} = this.props.config;
-    let sidebarItemLists;
+    let sidebarList;
     let sidebarItem;
 
     try {
       const customizedComponent = React.createElement(component, options);
 
       let iconClassName;
-
       if (this.state.isEnabled) {
         if (this.state.isOpen){
           iconClassName = 'fa fa-arrow-down' 
@@ -51,9 +49,9 @@ export default class SidebarItem extends Component {
       )
 
       if (Array.isArray(children)) {
-        sidebarItemLists = children.map((sidebarItemListConfig, index, array)=>{
+        sidebarList = children.map((sidebarItemListConfig, index, array)=>{
           return (
-            <SidebarItemList config={sidebarItemListConfig} />
+            <SidebarItem config={sidebarItemListConfig} />
           )
         });
       }
@@ -64,9 +62,11 @@ export default class SidebarItem extends Component {
     }
     
     return (
-      <div class="sidebar-item-list-placeholder" onClick={this.handleClick}>
+      <div onClick={this.handleClick}>
         {sidebarItem}
-        {this.state.isOpen && this.state.isEnabled && sidebarItemLists}
+        <div className="sidebar-list">
+          {this.state.isOpen && this.state.isEnabled && sidebarList}
+        </div>
       </div>
     )
   }

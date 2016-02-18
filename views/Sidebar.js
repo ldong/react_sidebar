@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SidebarItemList from './SidebarItem.js';
+import SidebarItem from './SidebarItem.js';
 
 export default class Sidebar extends Component {
 
@@ -9,13 +9,13 @@ export default class Sidebar extends Component {
 
   render() {
     const {config} = this.props;
-    let sidebarItemLists;
+    let sidebarList;
 
     try {
       if (Array.isArray(config)) {
-        sidebarItemLists = config.map((sidebarItemListConfig, index, array)=>{
+        sidebarList = config.map((sidebarItemConfig, index, array)=>{
           return (
-            <SidebarItemList config={sidebarItemListConfig} />
+            <SidebarItem config={sidebarItemConfig} />
           )
         });
       }
@@ -26,7 +26,7 @@ export default class Sidebar extends Component {
 
     return (
       <div className="sidebar">
-        {sidebarItemLists}
+        {sidebarList}
       </div>
     )
   }
