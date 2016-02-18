@@ -11,64 +11,62 @@ export default class SidebarItem extends Component {
           isOpen: props.config.isOpen || false,
           isEnabled: !!props.config.children 
       };
-      
-      console.log('state', this.state);
+      // console.log('state', this.state);
       this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
     e.stopPropagation();
 
-    if(this.state.isEnabled){
+    if (this.state.isEnabled) {
       this.setState({
           isOpen: !this.state.isOpen,
       });
     }
-    console.log('handleClick clicked');
   }
 
   render() {
-    const {name, component, options, children} = this.props.config;
+    const {component, options, children} = this.props.config;
     let sidebarItemLists;
     let sidebarItem;
 
     try {
-      const compoundComponent = React.createElement(component, options);
+      const customizedComponent = React.createElement(component, options);
+
+      let iconClassName;
+
+      if (this.state.isEnabled) {
+        if (this.state.isOpen){
+          iconClassName = 'fa fa-arrow-down' 
+        } else {
+          iconClassName = 'fa fa-arrow-right'
+        };
+      }
 
       sidebarItem = (
         <div className="sidebar-item">
-          <div>
-            {this.state.isEnabled ? this.state.isOpen ? 'v' : '>'  : ""}
-          </div>
-          <div>
-           {compoundComponent}
-          </div>
-          <div> 
-            <span>TEXT</span>
-          </div>
+          <span className={iconClassName}></span>
+          {customizedComponent}
         </div>
       )
 
-      if (children) {
+      if (Array.isArray(children)) {
         sidebarItemLists = children.map((sidebarItemListConfig, index, array)=>{
           return (
             <SidebarItemList config={sidebarItemListConfig} />
           )
         });
       }
+
     } catch (e){
       console.error('Sidebar Item occured some errors');
       console.error(e.message, e.name);
     }
     
     return (
-      <div onClick={this.handleClick}>
-        <div className="sidebar-item">
-          {sidebarItem}      
-        </div>
-        <div className={this.state.isOpen && this.state.isEnabled ? "sidebar-item" : "sidebar-item hidden"}>
-          {sidebarItemLists}
-        </div>
+      <div class="sidebar-item-list-placeholder" onClick={this.handleClick}>
+        {sidebarItem}
+        {this.state.isOpen && this.state.isEnabled && sidebarItemLists}
       </div>
     )
   }

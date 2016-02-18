@@ -7,10 +7,7 @@ export default class IconComponent extends Component {
 
   render() {
     return (
-      <div>
-        ICON-COMPONENT
-        <span className={`icon-component ${this.props.name}`}></span>
-      </div>
+      <span className={`icon-component ${this.props.name}`}></span>
     )
   }
 }

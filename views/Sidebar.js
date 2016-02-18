@@ -14,7 +14,6 @@ export default class Sidebar extends Component {
     try {
       if (Array.isArray(config)) {
         sidebarItemLists = config.map((sidebarItemListConfig, index, array)=>{
-          console.log();
           return (
             <SidebarItemList config={sidebarItemListConfig} />
           )

@@ -7,10 +7,7 @@ export default class TextComponent extends Component {
 
   render() {
     return (
-      <div>
-        TEXT-COMPONENT
-        <span className="text-component">{this.props.name}</span>
-      </div>
+        <span className='text-component'>{this.props.name}</span>
     )
   }
 }

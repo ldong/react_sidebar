@@ -12,50 +12,93 @@ export default class MySidebar extends Component {
   render() {
     const config = [
       {
-        name: 'RESOURCE',
-        component: 'text',
-        options: { },
+        component: CompoundComponent,
+        options: {
+          left: {
+            component: IconComponent,
+            options: { 
+              name: "fa fa-globe",
+            }
+          },
+          right: {
+            component: TextComponent,
+            options: { 
+              name: "RESOURCE",
+            }
+          }
+        },
         isOpen: true,
         children: [
           {
-            name: 'DATA_CENTER',
+            component: TextComponent,
+            options: {
+              name: 'DATA_CENTER',
+            },
+          },
+          {
+            component: TextComponent,
+            options: {
+              name: 'NODES',
+            },
+          },
+          {
+            component: TextComponent,
+            options: {
+              name: 'VIRTUAL_IPS',
+            },
+          },
+          {
+            component: TextComponent,
+            options: {
+              name: 'HARDWARES',
+            },
+          },
+          {
             component: CompoundComponent,
             options: {
               left: {
                 component: IconComponent,
                 options: { 
-                  name: "ICON",
+                  name: "fa fa-sitemap"
                 }
               },
               right: {
                 component: TextComponent,
                 options: { 
-                  name: "TextComponent",
+                  name: 'INSTANCES'
                 }
-              },
-            }
-          },
-          
-          {
-            name: 'NODES',
-            component: 'text',
-            options: { },
-          },
-
-          {
-            name: 'INSTANCES',
-            component: 'text',
-            options: { },
+              }
+            },
             children: [
               {
-                name: 'CENTRAL_AUTHORITY',
-                component: 'text',
-                options: { },
+                component: TextComponent,
+                options: { 
+                  name: 'CENTRAL_AUTHORITY'
+                }
               },
-              {
-                name: 'ZEN',
-                component: 'text',
-                options: { },
+              { 
+                component: TextComponent,
+                options: { 
+                  name: 'ZEN'
+                }
+              },
+              { 
+                component: TextComponent,
+                options: { 
+                  name: 'NANOLOG'
+                }
+              },
+              { 
+                component: TextComponent,
+                options: { 
+                  name: 'SMTP'
+                }
+              },
+              { 
+                component: TextComponent,
+                options: { 
+                  name: 'BEHAVIOR_ANALYSIS'
+                }
               }
             ]
           }
@@ -65,7 +108,7 @@ export default class MySidebar extends Component {
 
     return (
       <div>
-        <Sidebar config={config} />
+        <Sidebar config={[...config]} />
       </div>
     )
   }
